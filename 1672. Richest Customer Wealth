@@ -1,0 +1,27 @@
+public class Solution {
+    public int MaximumWealth(int[][] accounts) {
+        int sum = 0;
+        List<int> bankTotal = new List<int>();
+        for(int i = 0; i < accounts.GetLength(0); i++)
+        {
+            for(int j = 0; j < accounts[i].GetLength(0); j++)
+            {
+                sum += accounts[i][j];
+            }
+            bankTotal.Add(sum);
+            sum = 0;
+        }
+        return findHighest(bankTotal);
+    }
+
+    public int findHighest(List<int> bankTotal)
+    {
+        int highest = 0;
+        foreach(var num in bankTotal)
+        {
+            if(num > highest)
+                highest = num;
+        }
+        return highest;
+    }
+}
