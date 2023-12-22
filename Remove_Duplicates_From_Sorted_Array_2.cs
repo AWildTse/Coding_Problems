@@ -1,33 +1,26 @@
 public class Solution {
     public int RemoveDuplicates(int[] nums) {
-        int unique = 1;
-        int currElement = 0;
-        //loop through array starting at the end
-        for(int i = nums.Length - 1; i >= 0; i--) {
-            //avoid i - 1 out of bounds
-            if(i == 0){
-                break;
-            }
-            currElement = nums[i];
-            //If we find the same element, shift the array from that index
-            if(nums[i - 1] == currElement) {
-                ShiftLeft(nums, i);
-                continue;
-            }
-            else {
-                //Otherwise, update the currentElement and add a unique counter to return.
-                currElement = nums[i - 1];
-                unique++;
+        //Check if the array is empty
+        if (nums == null || nums.Length == 0) {
+            return 0;
+        }
+        
+        int index = 1;
+        //Go through all the numbers in the array
+        for (int i = 1; i < nums.Length; i++) {
+            //If the current number != previous number
+            if (nums[i] != nums[i - 1]) {
+                //We take the next index to be overwritten and replace the number
+                nums[index] = nums[i];
+                //We increment the index to be overwritten next
+                index++;
             }
         }
-        return unique;
-    }
-    public void ShiftLeft(int[] nums, int index) {
-        for(int i = index; i < nums.Length; i++) {
-            nums[i - 1] = nums[i];
-        }
+        //The index is where the last overwritten number was + 1
+        return index;
     }
 }
+
 /**
 Given an integer array nums sorted in non-decreasing order, remove the duplicates in-place such that each unique element appears only once. The relative order of the elements should be kept the same. Then return the number of unique elements in nums.
 
